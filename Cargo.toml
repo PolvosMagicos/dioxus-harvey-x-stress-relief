@@ -1,0 +1,17 @@
+[package]
+name = "stress-x-harvey"
+version = "0.1.0"
+authors = ["Polvos Magicos <73202603+PolvosMagicos@users.noreply.github.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus = { version = "0.7.9", features = ["router"] }
+async-std = { version = "1.13", features = ["attributes"] }
+
+[features]
+default = ["desktop"]
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]

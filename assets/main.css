@@ -1,0 +1,206 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#main {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  font-family: Inter, Arial, sans-serif;
+  overflow: hidden;
+}
+
+.page {
+  width: 100vw;
+  min-height: 100vh;
+  background: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-cards {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  gap: 42px;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 330px;
+  height: 520px;
+  padding: 34px 28px;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #111111;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: visible;
+}
+
+.song-title {
+  margin: 0 0 24px;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.cover-stage {
+  width: 170px;
+  height: 170px;
+  margin: 0 auto;
+  position: relative;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.aura-fade {
+  width: 190px;
+  height: 190px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 400ms ease,
+    visibility 0s linear 700ms;
+}
+
+.aura-fade.visible {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 700ms ease,
+    visibility 0s linear 0s;
+}
+
+.aura-fade.idle {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.cover-aura {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+
+  background: radial-gradient(
+    circle,
+    rgb(var(--aura-rgb)) 0%,
+    rgb(var(--aura-rgb)) 48%,
+    rgba(var(--aura-rgb), 0.95) 68%,
+    rgba(var(--aura-rgb), 0.65) 84%,
+    transparent 100%
+  );
+
+  filter: none;
+}
+
+.cover-aura.breathing {
+  animation-name: cover-aura-breath;
+  animation-duration: var(--beat-duration, 0.851s);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: var(--aura-play-state, running);
+}
+
+.cover-aura.aura-phase-a {
+  animation-delay: 0s;
+}
+
+.cover-aura.aura-phase-b {
+  animation-delay: calc(var(--beat-duration, 0.851s) / -2);
+}
+
+@keyframes cover-aura-breath {
+  0%,
+  100% {
+    transform: scale(0.88);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.cover {
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
+  background: black;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-track {
+  width: 170px;
+  height: 5px;
+  margin: 40px auto 52px;
+  border-radius: 999px;
+  background: #e0e0e0;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #111111;
+}
+
+.progress-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 999px;
+  background: #111111;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lyric {
+  margin: 0 auto;
+  max-width: 270px;
+  min-height: 110px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.floating-controls {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(50%);
+  display: flex;
+  gap: 50px;
+  z-index: 10;
+}
+
+.control-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  background: white;
+  color: black;
+}
+
+.control-button.secondary {
+  opacity: 0.75;
+}
